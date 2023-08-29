@@ -5,9 +5,12 @@ LIGHT_GRAY = (211, 211, 211)
 BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 GOLD = (219, 172, 52)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+RED = (255, 154, 153)
+DARK_RED = (255, 0, 0)
+GREEN = (144, 238, 144)
+DARK_GREEN = (5, 102, 8)
+BLUE = (173, 216, 230)
+DARK_BLUE = (0, 0, 255)
 
 # Dimensions
 SQUARE_EDGE = 45

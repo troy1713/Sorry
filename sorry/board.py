@@ -5,15 +5,35 @@ from .peg import Peg
 class Board:
     def __init__(self):
         self.edge = []
-        self.yellow_start = 4
-        self.red_start = 4
-        self.green_start = 4
-        self.blue_start = 4
+        self.yellow_start = []
+        self.red_start = []
+        self.green_start = []
+        self.blue_start = []
         for i in range(60):
             self.edge.append(0)
+        for i in range(4):
+            gold_peg = Peg(GOLD, -1)
+            green_peg = Peg(GREEN, -1)
+            red_peg = Peg(RED, -1)
+            blue_peg = Peg(BLUE, -1)
+            self.yellow_start.append(gold_peg)
+            self.red_start.append(red_peg)
+            self.green_start.append(green_peg)
+            self.blue_start.append(blue_peg)
+            del gold_peg, green_peg, blue_peg, red_peg # We are NOT leaking this memory
     
     def draw_board(self, win):
+        """
+        Draws the game board, including the edges, circles, words.
+        This took a long time to make.
+        """
         win.fill(GRAY)
+        pg.font.init()
+        info_font = pg.font.Font(None, 34)
+        start_txt = info_font.render('START', False, BLACK, None)
+        start_txt_rect = start_txt.get_rect()
+        home_txt = info_font.render('HOME', False, BLACK, None)
+        home_txt_rect = home_txt.get_rect()
 
         # Draw outer grid (60 tiles)
         pg.draw.rect(win, LIGHT_GRAY, (0, 15 * SQUARE_EDGE, SQUARE_EDGE * 15, SQUARE_EDGE)) # bottom
@@ -53,6 +73,27 @@ class Board:
         pg.draw.circle(win, BLUE, ((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5, SCREEN_HEIGHT-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)), (1.5*SQUARE_EDGE))
         pg.draw.circle(win, RED, (SCREEN_WIDTH-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), SCREEN_HEIGHT-((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5)), (1.5*SQUARE_EDGE))
 
+        # Draw the word 'START'
+        start_txt_rect.center = ((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25, (SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5)
+        win.blit(start_txt, start_txt_rect) # yellow
+        start_txt_rect.center = (SCREEN_WIDTH-((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), (4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)
+        win.blit(start_txt, start_txt_rect) # green
+        start_txt_rect.center = (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25))
+        win.blit(start_txt, start_txt_rect) # blue
+        start_txt_rect.center = (SCREEN_WIDTH-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), SCREEN_HEIGHT-((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5))
+        win.blit(start_txt, start_txt_rect) # red
+
+        # Draw the word 'HOME'
+        home_txt_rect.center = ((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25, (SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5)
+        win.blit(home_txt, home_txt_rect) # yellow
+        home_txt_rect.center = (SCREEN_WIDTH-((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5), (2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)
+        win.blit(home_txt, home_txt_rect) # green
+        home_txt_rect.center = ((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5, SCREEN_HEIGHT-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25))
+        win.blit(home_txt, home_txt_rect) # blue
+        home_txt_rect.center = (SCREEN_WIDTH-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), SCREEN_HEIGHT-((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5))
+        win.blit(home_txt, home_txt_rect) # red
+
+
         # Yellow triangle polygon coords
         #ylw_triangle = [((2*sqr_edge) + 2.5, 6 * sqr_edge+2.5), ]
         #pg.draw.polygon(screen, white, ylw_triangle) 
@@ -86,7 +127,19 @@ class Board:
             y = 2.5 + val*SQUARE_EDGE + half_sqr + SQUARE_EDGE
             return x, y
     
-    def draw_edge(self, win):
+    def draw_pegs(self, win):
+        if len(self.yellow_start) > 0:
+            for i in range(len(self.yellow_start)):
+                piece = self.yellow_start[i]
+                match i:
+                    case 0:
+                        piece.draw(win, 4*SQUARE_EDGE, SQUARE_EDGE + (SQUARE_EDGE/2) + 5)
+                    case 1:
+                        piece.draw(win, 5*SQUARE_EDGE, SQUARE_EDGE + (SQUARE_EDGE/2) + 5)
+                    case 2:
+                        piece.draw(win, 4*SQUARE_EDGE, 3 * SQUARE_EDGE + 2.5)
+                    case 3:
+                        piece.draw(win, 5*SQUARE_EDGE, 3 * SQUARE_EDGE + 2.5)
         for i in range(60):
             if self.edge[i] != 0:
                 piece = self.edge[i]

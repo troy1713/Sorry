@@ -4,7 +4,7 @@ from .constants import GOLD, GREEN, RED, BLUE, SQUARE_EDGE
 class Peg:
     PIECE_RADIUS = (SQUARE_EDGE) * 0.35
     
-    def __init__(self, color=GOLD, value=-1, x=0, y=0):
+    def __init__(self, color=GOLD, value=-1):
         self.color = color
         self.value = value
         self.safe = True

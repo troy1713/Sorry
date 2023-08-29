@@ -33,11 +33,11 @@ def main():
         board.draw_board(WIN)
         x = (SQUARE_EDGE-5)/2 +2.5
         y = (SQUARE_EDGE-5)/2 +2.5
-        peg = Peg()
-        board.edge[59] = peg
+        peg = Peg(DARK_GREEN)
+        board.edge[20] = peg
         #board.edge[58] = peg
         #peg.draw(WIN, x, y)
-        board.draw_edge(WIN)
+        board.draw_pegs(WIN)
 
         pg.display.update()
 
