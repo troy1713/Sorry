@@ -31,12 +31,27 @@ class Board:
         pg.draw.rect(win, WHITE, (15 * SQUARE_EDGE+2.5, 15 * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3)
 
         # Draw safety zones
+        pg.draw.rect(win, LIGHT_GRAY, (2*SQUARE_EDGE, SQUARE_EDGE, SQUARE_EDGE, SQUARE_EDGE*5)) #y
+        pg.draw.rect(win, LIGHT_GRAY, (10*SQUARE_EDGE, 2*SQUARE_EDGE, SQUARE_EDGE*5, SQUARE_EDGE)) #g
+        pg.draw.rect(win, LIGHT_GRAY, (SQUARE_EDGE, 13*SQUARE_EDGE, SQUARE_EDGE*5, SQUARE_EDGE), 0, 3) #b
+        pg.draw.rect(win, LIGHT_GRAY, (13*SQUARE_EDGE, 10*SQUARE_EDGE, SQUARE_EDGE, SQUARE_EDGE*5), 0, 3) #r
         for i in range(1, 6):
-            pg.draw.rect(win, LIGHT_GRAY, (2 * SQUARE_EDGE, i * SQUARE_EDGE+2.5, SQUARE_EDGE, SQUARE_EDGE))
-            pg.draw.rect(win, WHITE, ((2 * SQUARE_EDGE) + 2.5, i * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3)
-    
-        # Yellow starting circle
-        pg.draw.circle(win, YELLOW, ((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2), (SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), (1.5*SQUARE_EDGE))
+            pg.draw.rect(win, WHITE, ((2 * SQUARE_EDGE) + 2.5, i * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3) #y
+            pg.draw.rect(win, WHITE, (((i+9) * SQUARE_EDGE) + 2.5, 2 * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3) #g
+            pg.draw.rect(win, WHITE, ((i * SQUARE_EDGE) + 2.5, 13 * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3) #b
+            pg.draw.rect(win, WHITE, ((13 * SQUARE_EDGE) + 2.5, (i+9) * SQUARE_EDGE+2.5, SQUARE_EDGE-5, SQUARE_EDGE-5), 0, 3) #r
+
+        # Starting circles
+        pg.draw.circle(win, YELLOW, ((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25, (SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, GREEN, (SCREEN_WIDTH-((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), (4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, BLUE, (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, RED, (SCREEN_WIDTH-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), SCREEN_HEIGHT-((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5)), (1.5*SQUARE_EDGE))
+
+        # Home circles
+        pg.draw.circle(win, YELLOW, ((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25, (SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, GREEN, (SCREEN_WIDTH-((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5), (2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, BLUE, ((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5, SCREEN_HEIGHT-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)), (1.5*SQUARE_EDGE))
+        pg.draw.circle(win, RED, (SCREEN_WIDTH-((2 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25), SCREEN_HEIGHT-((SQUARE_EDGE/3) + 7 * SQUARE_EDGE+2.5)), (1.5*SQUARE_EDGE))
 
         # Yellow triangle polygon coords
         #ylw_triangle = [((2*sqr_edge) + 2.5, 6 * sqr_edge+2.5), ]

@@ -5,16 +5,15 @@ The board game Sorry!
 """
 
 import pygame as pg
-from lo_siento.constants import *
-from lo_siento.board import Board
-
-from lo_siento.peg import Peg
+from sorry.constants import *
+from sorry.board import Board
+from sorry.peg import Peg
 
 WIN = pg.display.set_mode((720, 720), pg.SCALED)
 FPS = 60
 
 def main():
-    pg.display.set_caption("Lo Siento! juego")
+    pg.display.set_caption("Sorry! game")
 
     clock = pg.time.Clock()
     playing = True
