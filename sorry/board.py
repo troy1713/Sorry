@@ -13,9 +13,9 @@ class Board:
             self.edge.append(0)
         for i in range(4):
             gold_peg = Peg(GOLD, -1)
-            green_peg = Peg(GREEN, -1)
-            red_peg = Peg(RED, -1)
-            blue_peg = Peg(BLUE, -1)
+            green_peg = Peg(DARK_GREEN, -1)
+            red_peg = Peg(DARK_RED, -1)
+            blue_peg = Peg(DARK_BLUE, -1)
             self.yellow_start.append(gold_peg)
             self.red_start.append(red_peg)
             self.green_start.append(green_peg)
@@ -100,6 +100,7 @@ class Board:
 
     def add_peg(self, value, Peg):
         self.edge[value] = Peg
+        # func move() in Peg
     
     def find_x_y(self, val):
         half_sqr = (SQUARE_EDGE-5) / 2
@@ -140,6 +141,43 @@ class Board:
                         piece.draw(win, 4*SQUARE_EDGE, 3 * SQUARE_EDGE + 2.5)
                     case 3:
                         piece.draw(win, 5*SQUARE_EDGE, 3 * SQUARE_EDGE + 2.5)
+        if len(self.green_start) > 0:
+            for i in range(len(self.green_start)):
+                piece = self.green_start[i]
+                match i:
+                    case 0:
+                        piece.draw(win, 13*SQUARE_EDGE, 3 * SQUARE_EDGE + (SQUARE_EDGE/2) + 7.5)
+                    case 1:
+                        piece.draw(win, 14*SQUARE_EDGE, 3 * SQUARE_EDGE + (SQUARE_EDGE/2) + 7.5)
+                    case 2:
+                        piece.draw(win, 13*SQUARE_EDGE, 5 * SQUARE_EDGE + (SQUARE_EDGE/4))
+                    case 3:
+                        piece.draw(win, 14*SQUARE_EDGE, 5 * SQUARE_EDGE + (SQUARE_EDGE/4))
+        if len(self.blue_start) > 0:
+            for i in range(len(self.blue_start)):
+                piece = self.blue_start[i]
+                match i:
+                    case 0:
+                        piece.draw(win, (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5) - (1.5*SQUARE_EDGE/2)), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)-(1.5*SQUARE_EDGE/2))
+                    case 1:
+                        piece.draw(win, (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5) + (1.5*SQUARE_EDGE/2)), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)-(1.5*SQUARE_EDGE/2))
+                    case 2:
+                        piece.draw(win, (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5) - (1.5*SQUARE_EDGE/2)), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)+(1.5*SQUARE_EDGE/2))
+                    case 3:
+                        piece.draw(win, (((SQUARE_EDGE/3) + 2 * SQUARE_EDGE+2.5) + (1.5*SQUARE_EDGE/2)), SCREEN_HEIGHT-((4 * SQUARE_EDGE) + (SQUARE_EDGE / 2) + 1.25)+(1.5*SQUARE_EDGE/2))
+        if len(self.red_start) > 0:
+            for i in range(len(self.red_start)):
+                piece = self.red_start[i]
+                match i:
+                    case 0:
+                        piece.draw(win, SCREEN_WIDTH - 4*SQUARE_EDGE, SCREEN_HEIGHT - (SQUARE_EDGE + (SQUARE_EDGE/2) + 5))
+                    case 1:
+                        piece.draw(win, SCREEN_WIDTH - 5*SQUARE_EDGE, SCREEN_HEIGHT - (SQUARE_EDGE + (SQUARE_EDGE/2) + 5))
+                    case 2:
+                        piece.draw(win, SCREEN_WIDTH - 4*SQUARE_EDGE, SCREEN_HEIGHT - (3 * SQUARE_EDGE + 2.5))
+                    case 3:
+                        piece.draw(win, SCREEN_WIDTH - 5*SQUARE_EDGE, SCREEN_HEIGHT - (3 * SQUARE_EDGE + 2.5))
+
         for i in range(60):
             if self.edge[i] != 0:
                 piece = self.edge[i]

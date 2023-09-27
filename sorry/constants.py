@@ -11,6 +11,7 @@ GREEN = (144, 238, 144)
 DARK_GREEN = (5, 102, 8)
 BLUE = (173, 216, 230)
 DARK_BLUE = (0, 0, 255)
+ORANGE = (255, 213, 128)
 
 # Dimensions
 SQUARE_EDGE = 45

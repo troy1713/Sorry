@@ -19,6 +19,8 @@ class Peg:
             self.safe = True
         elif value > 99:
             self.safe = True
+        else:
+            self.safe = False
     
     def __repr__(self):
         return str(self.color) + " peg at " + str(self.value)
